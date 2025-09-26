@@ -20,6 +20,8 @@ public class CameraController : MonoBehaviour
 
         bottomLeftLimit = Tilemap.localBounds.min + new Vector3(halfWidth, halfHeight, 0f);
         topRightLimit = Tilemap.localBounds.max + new Vector3(-halfWidth, -halfHeight, 0f);
+
+        PlayerController2D.instance.SetBounds(Tilemap.localBounds.min, Tilemap.localBounds.max);
     }
 
     
