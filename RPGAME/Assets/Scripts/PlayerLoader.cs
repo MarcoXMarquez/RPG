@@ -4,19 +4,23 @@ public class PlayerLoader : MonoBehaviour
 {
     public GameObject playerPrefab;
 
-    void Start()
+    void Awake()
     {
-        // Only spawn the player if one doesn't exist already
+        // Ejecutar ANTES que los Start() de otros scripts
         if (PlayerController2D.instance == null)
         {
             GameObject newPlayer = Instantiate(
                 playerPrefab,
-                transform.position, // spawn at the loader's position
+                transform.position,
                 Quaternion.identity
             );
 
-            // Make sure PlayerController2D.instance points to this new one
             PlayerController2D.instance = newPlayer.GetComponent<PlayerController2D>();
+        }
+        else
+        {
+            // Si ya existe (por DontDestroyOnLoad), solo reubícalo
+            PlayerController2D.instance.transform.position = transform.position;
         }
     }
 }
