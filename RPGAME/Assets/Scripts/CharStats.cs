@@ -6,6 +6,9 @@ public class CharStats : MonoBehaviour
     
     public int characterLevel;  
     public int currentExperience;
+    public int[] expToNextLevel;
+    public int maxLevel = 100;
+    public int baseExp = 1000;
 
     public int currentHealth;
     public int maxHealth = 100;
@@ -27,7 +30,12 @@ public class CharStats : MonoBehaviour
 
     void Start()
     {
-        
+        expToNextLevel = new int[maxLevel];
+        expToNextLevel[1] = baseExp;    
+        for(int i = 2; i < expToNextLevel.Length; i++)
+        {
+             expToNextLevel[i] = Mathf.FloorToInt(expToNextLevel[i - 1] * 1.05f);   
+        }    
     }
 
     // Update is called once per frame

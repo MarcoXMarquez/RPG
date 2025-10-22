@@ -494,6 +494,9 @@ MonoBehaviour:
   characterName: Aedo
   characterLevel: 0
   currentExperience: 250
+  expToNextLevel: 00000000640000000000000000000000000000000000000000000000000000000000000000000000
+  maxLevel: 100
+  baseExp: 1000
   currentHealth: 0
   maxHealth: 100
   currentMana: 0
@@ -504,7 +507,7 @@ MonoBehaviour:
   armorPower: 0
   equippedWeapon: 
   equippedArmor: 
-  characterImage: {fileID: 0}
+  characterImage: {fileID: -8107172888652668758, guid: 17bd763964ff5184fb5eb57153f533de, type: 3}
 --- !u!4 &647715964
 Transform:
   m_ObjectHideFlags: 0
