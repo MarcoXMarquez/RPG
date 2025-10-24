@@ -4,7 +4,7 @@ public class EssentialsLoader : MonoBehaviour
 {
     public GameObject UIScreen;
     public GameObject Player;
-
+    public GameObject GameManager;
     void Start()
     {
         // Evita duplicar UIFade
@@ -19,6 +19,11 @@ public class EssentialsLoader : MonoBehaviour
         {
             var playerClone = Instantiate(Player).GetComponent<PlayerController2D>();
             PlayerController2D.instance = playerClone;
+        }
+        if (GameManager.instance == null && GameManager != null)
+        {
+            var gmClone = Instantiate(GameManager).GetComponent<GameManager>();
+            GameManager.instance = gmClone;
         }
     }
 }
