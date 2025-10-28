@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class CharStats : MonoBehaviour
@@ -29,6 +30,7 @@ public class CharStats : MonoBehaviour
 
     void Start()
     {
+        currentHealth = 100;
         // Initialize EXP required per level
         expToNextLevel = new int[maxLevel];
         expToNextLevel[1] = baseExp;
@@ -83,5 +85,15 @@ public class CharStats : MonoBehaviour
         {
             currentExperience = 0;
         }
+    }
+
+    public void ChangeHealth (int amount) {
+        currentHealth += amount;
+        if (currentHealth <= 0)
+        {   
+            gameObject.SetActive(false); 
+        }
+
+
     }
 }

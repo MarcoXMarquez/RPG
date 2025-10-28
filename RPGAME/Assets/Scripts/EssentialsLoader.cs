@@ -20,10 +20,10 @@ public class EssentialsLoader : MonoBehaviour
             var playerClone = Instantiate(Player).GetComponent<PlayerController2D>();
             PlayerController2D.instance = playerClone;
         }
-        if (GameManager.instance == null && GameManager != null)
-        {
-            var gmClone = Instantiate(GameManager).GetComponent<GameManager>();
-            GameManager.instance = gmClone;
-        }
+        //if (GameManager.instance == null && GameManager != null)
+        //{
+        //    var gmClone = Instantiate(GameManager).GetComponent<GameManager>();
+        //    GameManager.instance = gmClone;
+        //}
     }
 }
