@@ -3,40 +3,60 @@ using UnityEngine;
 public class EnemyMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
-    public float speed;
+    public float speed = 2f;
+    private int facingDirection = 1;
+
     private Transform player;
     private bool isChasing;
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
     void Update()
     {
-        if (isChasing)
+        if (!isChasing || player == null)
         {
-            Vector2 direction = (player.position - transform.position).normalized;
-            rb.linearVelocity = direction * speed;
+            rb.linearVelocity = Vector2.zero;
+            return;
         }
-            
+
+        // Calculate direction
+        Vector2 direction = (player.position - transform.position).normalized;
+
+        // Flip only if player is on the opposite side
+        if (player.position.x > transform.position.x && facingDirection < 0)
+        {
+            Flip();
+        }
+        else if (player.position.x < transform.position.x && facingDirection > 0)
+        {
+            Flip();
+        }
+
+        // Move toward the player
+        rb.linearVelocity = direction * speed;
     }
+
+    void Flip()
+    {
+        facingDirection *= -1;
+        transform.localScale = new Vector3(facingDirection, 1, 1);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
-            if(player == null)
-            {
-                player = collision.transform;
-            }
-                
+            player = collision.transform;
             isChasing = true;
         }
-    }   
+    }
+
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.CompareTag("Player"))
         {
             rb.linearVelocity = Vector2.zero;
             isChasing = false;

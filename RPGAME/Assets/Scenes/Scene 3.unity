@@ -136,6 +136,18 @@ PrefabInstance:
       value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3626916397498700004, guid: 69b32b40e958bfd42a92355eb7ecdc5e, type: 3}
+      propertyPath: m_Size.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: 69b32b40e958bfd42a92355eb7ecdc5e, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: 69b32b40e958bfd42a92355eb7ecdc5e, type: 3}
+      propertyPath: m_DrawMode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3626916397498700004, guid: 69b32b40e958bfd42a92355eb7ecdc5e, type: 3}
       propertyPath: m_SortingLayer
       value: 2
       objectReference: {fileID: 0}
@@ -145,15 +157,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 69b32b40e958bfd42a92355eb7ecdc5e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 8.406117
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 69b32b40e958bfd42a92355eb7ecdc5e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 8.406117
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 69b32b40e958bfd42a92355eb7ecdc5e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 8.406117
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7878350319992209165, guid: 69b32b40e958bfd42a92355eb7ecdc5e, type: 3}
       propertyPath: m_LocalPosition.x
@@ -412,9 +424,33 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1944028688401250958, guid: 1ed32c1a737bf5c4184e6736e4f24c07, type: 3}
+      propertyPath: m_Radius
+      value: 0.81881714
+      objectReference: {fileID: 0}
+    - target: {fileID: 1944028688401250958, guid: 1ed32c1a737bf5c4184e6736e4f24c07, type: 3}
+      propertyPath: m_Offset.x
+      value: -0.08126259
+      objectReference: {fileID: 0}
+    - target: {fileID: 1944028688401250958, guid: 1ed32c1a737bf5c4184e6736e4f24c07, type: 3}
+      propertyPath: m_Offset.y
+      value: -0.6812639
+      objectReference: {fileID: 0}
     - target: {fileID: 3148731504188775950, guid: 1ed32c1a737bf5c4184e6736e4f24c07, type: 3}
       propertyPath: m_Name
       value: Character
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317835956123281904, guid: 1ed32c1a737bf5c4184e6736e4f24c07, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317835956123281904, guid: 1ed32c1a737bf5c4184e6736e4f24c07, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317835956123281904, guid: 1ed32c1a737bf5c4184e6736e4f24c07, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4317835956123281904, guid: 1ed32c1a737bf5c4184e6736e4f24c07, type: 3}
       propertyPath: m_LocalPosition.x
@@ -455,6 +491,22 @@ PrefabInstance:
     - target: {fileID: 4317835956123281904, guid: 1ed32c1a737bf5c4184e6736e4f24c07, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4317835956123281904, guid: 1ed32c1a737bf5c4184e6736e4f24c07, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7240291149999291487, guid: 1ed32c1a737bf5c4184e6736e4f24c07, type: 3}
+      propertyPath: m_Size.x
+      value: 1.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 7240291149999291487, guid: 1ed32c1a737bf5c4184e6736e4f24c07, type: 3}
+      propertyPath: m_Size.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7240291149999291487, guid: 1ed32c1a737bf5c4184e6736e4f24c07, type: 3}
+      propertyPath: m_DrawMode
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -751,8 +803,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.0040479964, y: 0.14945906}
-  m_Size: {x: 0.21190399, y: 0.30108184}
+  m_Offset: {x: -0.12979126, y: 1.2959442}
+  m_Size: {x: 1.910614, y: 3.555542}
   m_Direction: 0
 --- !u!50 &562276507
 Rigidbody2D:
@@ -842,8 +894,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: -0.21225083, y: 0}
-  m_Radius: 0.5727222
+  m_Offset: {x: -0.4843197, y: 2.348587}
+  m_Radius: 6.916254
 --- !u!1 &760867994
 GameObject:
   m_ObjectHideFlags: 0
