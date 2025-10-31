@@ -4,62 +4,127 @@ public class EnemyMovement : MonoBehaviour
 {
     public Rigidbody2D rb;
     public float speed = 2f;
-    private int facingDirection = 1;
+    public float detectionRange = 5f;
+    public float attackRange = 1.5f;
+    public float attackCooldown = 1f; // tiempo entre ataques
 
+    private EnemyState enemyState;
+    private int facingDirection = 1;
+    private Animator anim;
     private Transform player;
-    private bool isChasing;
+    private float lastAttackTime; // tiempo del último ataque
 
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        changeState(EnemyState.Idle);
     }
 
     void Update()
     {
-        if (!isChasing || player == null)
+        if (player == null) return;
+
+        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+
+        // --- Cambiar de estado según la distancia ---
+        if (distanceToPlayer <= attackRange)
+        {
+            changeState(EnemyState.Attacking);
+        }
+        else if (distanceToPlayer <= detectionRange)
+        {
+            changeState(EnemyState.Chasing);
+        }
+        else
+        {
+            changeState(EnemyState.Idle);
+        }
+
+        // --- Comportamientos según estado ---
+        if (enemyState == EnemyState.Idle)
         {
             rb.linearVelocity = Vector2.zero;
-            return;
         }
+        else if (enemyState == EnemyState.Chasing)
+        {
+            Chase();
+        }
+        else if (enemyState == EnemyState.Attacking)
+        {
+            rb.linearVelocity = Vector2.zero;
+            Attack();
+        }
+    }
 
-        // Calculate direction
+    void Chase()
+    {
+        if (player == null) return;
+
         Vector2 direction = (player.position - transform.position).normalized;
 
-        // Flip only if player is on the opposite side
-        if (player.position.x > transform.position.x && facingDirection < 0)
+        // Girar hacia el jugador
+        if (player.position.x > transform.position.x && facingDirection == -1)
         {
             Flip();
         }
-        else if (player.position.x < transform.position.x && facingDirection > 0)
+        else if (player.position.x < transform.position.x && facingDirection == 1)
         {
             Flip();
         }
 
-        // Move toward the player
         rb.linearVelocity = direction * speed;
+    }
+
+    void Attack()
+    {
+        // Solo atacar si ha pasado suficiente tiempo desde el último ataque
+        if (Time.time >= lastAttackTime + attackCooldown)
+        {
+            lastAttackTime = Time.time;
+            anim.SetTrigger("attack"); // ejecuta animación de ataque
+            Debug.Log("Enemy atacando!");
+
+            // Aquí podrías agregar daño real al jugador:
+            // player.GetComponent<PlayerHealth>().TakeDamage(damage);
+        }
     }
 
     void Flip()
     {
         facingDirection *= -1;
-        transform.localScale = new Vector3(facingDirection, 1, 1);
+        //transform.localScale = new Vector3(facingDirection * , 1, 1);
+        transform.localScale = new Vector3(transform.localScale.x * -1 , transform.localScale.y, transform.localScale.z);
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    void changeState(EnemyState newState)
     {
-        if (collision.CompareTag("Player"))
-        {
-            player = collision.transform;
-            isChasing = true;
-        }
-    }
+        if (enemyState == newState) return;
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            rb.linearVelocity = Vector2.zero;
-            isChasing = false;
-        }
+        // Desactivar animaciones anteriores
+        anim.SetBool("isIdle", false);
+        anim.SetBool("isChasing", false);
+        anim.SetBool("isAttacking", false);
+
+        // Cambiar estado actual
+        enemyState = newState;
+
+        // Activar animación del nuevo estado
+        if (enemyState == EnemyState.Idle)
+            anim.SetBool("isIdle", true);
+        else if (enemyState == EnemyState.Chasing)
+            anim.SetBool("isChasing", true);
+        else if (enemyState == EnemyState.Attacking)
+            anim.SetBool("isAttacking", true);
+
+        Debug.Log("Estado cambiado a: " + enemyState);
     }
+}
+
+public enum EnemyState
+{
+    Idle,
+    Chasing,
+    Attacking
 }
