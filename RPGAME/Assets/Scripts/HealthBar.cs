@@ -4,7 +4,7 @@ using UnityEngine.UI;
 public class HealthBar : MonoBehaviour
 {
     private Slider slider;
-    private PlayerController2D playerController;
+    private PlayerHealth playerHealth;
 
     void Start()
     {
@@ -15,7 +15,7 @@ public class HealthBar : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         if (player != null)
         {
-            playerController = player.GetComponent<PlayerController2D>();
+            playerHealth = player.GetComponent<PlayerHealth>();
         }
         else
         {
@@ -25,10 +25,10 @@ public class HealthBar : MonoBehaviour
 
     void Update()
     {
-        if (playerController != null)
+        if (playerHealth != null)
         {
-            slider.maxValue = playerController.maxHealth;
-            slider.value = playerController.currentHealth;
+            slider.maxValue = playerHealth.maxHealth;
+            slider.value = playerHealth.currentHealth;
         }
     }
 }

@@ -6,7 +6,7 @@ public class EnemyMovement : MonoBehaviour
     public float speed = 2f;
     public float detectionRange = 5f;
     public float attackRange = 1.5f;
-    public float attackCooldown = 1f; // tiempo entre ataques
+    public float attackCooldown = 2f; // tiempo entre ataques
 
     private EnemyState enemyState;
     private int facingDirection = 1;
