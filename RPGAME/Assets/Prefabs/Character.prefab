@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2040649572383847353
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2399899766815878237}
+  m_Layer: 6
+  m_Name: AttackPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2399899766815878237
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2040649572383847353}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1.426, y: -0.14, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4317835956123281904}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3148731504188775950
 GameObject:
   m_ObjectHideFlags: 0
@@ -13,9 +44,12 @@ GameObject:
   - component: {fileID: 7632591570767884796}
   - component: {fileID: 1944028688401250958}
   - component: {fileID: 5150193920596688471}
+  - component: {fileID: 1547761406490187319}
   - component: {fileID: 4008228336025460063}
+  - component: {fileID: 1914237569846040373}
+  - component: {fileID: 4458146458838328503}
   - component: {fileID: 7914085301826361677}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Character
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -32,9 +66,10 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 31.01, y: -67.08, z: 0}
-  m_LocalScale: {x: 1.4115144, y: 1.4115144, z: 1.4115144}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_LocalScale: {x: 1.52, y: 1.4378377, z: 2.2166665}
+  m_ConstrainProportionsScale: 1
+  m_Children:
+  - {fileID: 2399899766815878237}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7240291149999291487
@@ -86,7 +121,7 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 2}
+  m_Size: {x: 1, y: 1}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -153,8 +188,8 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0, y: -0.6}
-  m_Radius: 0.33123875
+  m_Offset: {x: 0.000724667, y: -0.52236736}
+  m_Radius: 0.45898023
 --- !u!95 &5150193920596688471
 Animator:
   serializedVersion: 7
@@ -177,6 +212,28 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &1547761406490187319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3148731504188775950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ade937ab203ecb458a5a8ffd82d7956, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  attackPoint: {fileID: 2399899766815878237}
+  weaponRange: 1
+  knockbackForce: 20
+  enemyLayers:
+    serializedVersion: 2
+    m_Bits: 128
+  attackDamage: 10
+  attackStunTime: 0.5
+  anim: {fileID: 5150193920596688471}
+  cooldownBetweenAttacks: 0
 --- !u!114 &4008228336025460063
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,6 +247,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animationSpeed: 0.45
+--- !u!114 &1914237569846040373
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3148731504188775950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a10dbb0f817a4549a3720ba305abb8b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  characterName: Player
+  characterLevel: 1
+  currentExperience: 0
+  expToNextLevel: 
+  maxLevel: 100
+  baseExp: 1000
+  currentHealth: 0
+  maxHealth: 100
+  currentMana: 0
+  maxMana: 50
+  manaLevelBonus: 
+  strength: 0
+  defense: 0
+  weaponPower: 0
+  armorPower: 0
+  equippedWeapon: 
+  equippedArmor: 
+  characterImage: {fileID: 0}
+--- !u!114 &4458146458838328503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3148731504188775950}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 09ae2ae56dec9944ebd59302fd8fae58, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  playerCombat: {fileID: 1547761406490187319}
+  spriteRenderer: {fileID: 0}
 --- !u!114 &7914085301826361677
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +305,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 7632591570767884796}
-  moveSpeed: 8
   animator: {fileID: 5150193920596688471}
   areaTransitionName: 2-1
+  canMove: 1
+  isKnockedback: 0

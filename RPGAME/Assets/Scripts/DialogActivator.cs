@@ -9,7 +9,7 @@ public class DialogActivator : MonoBehaviour
     void Update()
     {
         // Asegurarse de que el diálogo no se active si ya está mostrando algo
-        if (canActivate && Input.GetButtonUp("Fire1") && !DialogManager.instance.dialogBox.activeInHierarchy)
+        if (canActivate && Input.GetButtonUp("Fire2") && !DialogManager.instance.dialogBox.activeInHierarchy)
         {
             DialogManager.instance.showDialog(dialogLines);
         }

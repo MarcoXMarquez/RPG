@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour
     public PlayerCombat playerCombat;
     public SpriteRenderer spriteRenderer; // asigna en inspector si está en un hijo
     public bool CanMove
+
     {
         get { return controller.canMove; }
         set { controller.canMove = value; }
@@ -38,6 +39,7 @@ public class PlayerMovement : MonoBehaviour
         if (Input.GetButtonDown("Slice"))
         {
             HandleAttackDirection();
+            float lastX = animator.GetFloat("lastMoveX");
             playerCombat.Attack();
         }
     }

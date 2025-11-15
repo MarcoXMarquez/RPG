@@ -24,37 +24,40 @@ public class EnemyMovement : MonoBehaviour
 
     void Update()
     {
-        if (player == null) return;
+        if (enemyState != EnemyState.Knockback)
+        {
+            if (player == null) return;
 
-        float distanceToPlayer = Vector2.Distance(transform.position, player.position);
+            float distanceToPlayer = Vector2.Distance(transform.position, player.position);
 
-        // --- Cambiar de estado según la distancia ---
-        if (distanceToPlayer <= attackRange)
-        {
-            changeState(EnemyState.Attacking);
-        }
-        else if (distanceToPlayer <= detectionRange)
-        {
-            changeState(EnemyState.Chasing);
-        }
-        else
-        {
-            changeState(EnemyState.Idle);
-        }
+            // --- Cambiar de estado según la distancia ---
+            if (distanceToPlayer <= attackRange)
+            {
+                changeState(EnemyState.Attacking);
+            }
+            else if (distanceToPlayer <= detectionRange)
+            {
+                changeState(EnemyState.Chasing);
+            }
+            else
+            {
+                changeState(EnemyState.Idle);
+            }
 
-        // --- Comportamientos según estado ---
-        if (enemyState == EnemyState.Idle)
-        {
-            rb.linearVelocity = Vector2.zero;
-        }
-        else if (enemyState == EnemyState.Chasing)
-        {
-            Chase();
-        }
-        else if (enemyState == EnemyState.Attacking)
-        {
-            rb.linearVelocity = Vector2.zero;
-            Attack();
+            // --- Comportamientos según estado ---
+            if (enemyState == EnemyState.Idle)
+            {
+                rb.linearVelocity = Vector2.zero;
+            }
+            else if (enemyState == EnemyState.Chasing)
+            {
+                Chase();
+            }
+            else if (enemyState == EnemyState.Attacking)
+            {
+                rb.linearVelocity = Vector2.zero;
+                Attack();
+            }
         }
     }
 
@@ -98,7 +101,7 @@ public class EnemyMovement : MonoBehaviour
         transform.localScale = new Vector3(transform.localScale.x * -1 , transform.localScale.y, transform.localScale.z);
     }
 
-    void changeState(EnemyState newState)
+    public void changeState(EnemyState newState)
     {
         if (enemyState == newState) return;
 
@@ -126,5 +129,6 @@ public enum EnemyState
 {
     Idle,
     Chasing,
-    Attacking
+    Attacking,
+    Knockback
 }

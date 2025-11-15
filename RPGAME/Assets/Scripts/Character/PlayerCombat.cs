@@ -5,8 +5,10 @@ public class PlayerCombat : MonoBehaviour
 {
     public Transform attackPoint;
     public float weaponRange = 1;
+    public float knockbackForce = 50; 
     public LayerMask enemyLayers;
     public int attackDamage = 10;
+    public float attackStunTime = 0.5f;
 
     public Animator anim;
 
@@ -25,7 +27,7 @@ public class PlayerCombat : MonoBehaviour
         if (timer > 0)
         {
             timer -= Time.deltaTime;
-        }
+        }   
     }
 
     public void Attack()
@@ -44,11 +46,32 @@ public class PlayerCombat : MonoBehaviour
     public void dealDamage()
     {
         Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackPoint.position, weaponRange, enemyLayers);
-        if (hitEnemies.Length > 0)
+
+        foreach (Collider2D enemy in hitEnemies)
         {
-            hitEnemies[0].GetComponent<EnemyHealth>().ChangeHealth(-attackDamage);
+            EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+            EnemyKnockback enemyKnockback = enemy.GetComponent<EnemyKnockback>();
+
+            if (enemyHealth != null)
+            {
+                enemyHealth.ChangeHealth(-attackDamage);
+            }
+            else
+            {
+                Debug.LogWarning($"El enemigo {enemy.name} no tiene componente EnemyHealth");
+            }
+
+            if (enemyKnockback != null)
+            {
+                enemyKnockback.Knockback(transform, knockbackForce, attackStunTime);
+            }
+            else
+            {
+                Debug.LogWarning($"El enemigo {enemy.name} no tiene componente EnemyKnockback");
+            }
         }
     }
+
     private IEnumerator FreezeMovementDuringAttack()
     {
         if (playerMovement == null) yield break;
